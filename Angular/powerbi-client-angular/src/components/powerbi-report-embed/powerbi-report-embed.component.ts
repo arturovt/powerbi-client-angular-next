@@ -1,9 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Embed, IReportEmbedConfiguration, Report } from 'powerbi-client';
-import { EventHandler, PowerBIEmbedComponent } from '../powerbi-embed/powerbi-embed.component';
+import {
+  EventHandler,
+  PowerBIEmbedComponent,
+} from '../powerbi-embed/powerbi-embed.component';
 import { isEmbedSetupValid } from '../../utils/utils';
 
 /**
@@ -12,8 +24,12 @@ import { isEmbedSetupValid } from '../../utils/utils';
 @Component({
   selector: 'powerbi-report[embedConfig]',
   template: '<div class={{cssClassName}} #reportContainer></div>',
+  standalone: true,
 })
-export class PowerBIReportEmbedComponent extends PowerBIEmbedComponent implements OnInit, OnChanges, AfterViewInit {
+export class PowerBIReportEmbedComponent
+  extends PowerBIEmbedComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   // Input() specify properties that will be passed from parent
   // Configuration for embedding the PowerBI Report (Required)
   @Input() embedConfig!: IReportEmbedConfiguration;
@@ -25,7 +41,8 @@ export class PowerBIReportEmbedComponent extends PowerBIEmbedComponent implement
   @Input() eventHandlers?: Map<string, EventHandler | null>;
 
   // Ref to the HTML div container element
-  @ViewChild('reportContainer') private containerRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('reportContainer')
+  private containerRef!: ElementRef<HTMLDivElement>;
 
   // Embedded entity
   // Note: Do not read or assign to this member variable directly, instead use the getter and setter
@@ -62,9 +79,13 @@ export class PowerBIReportEmbedComponent extends PowerBIEmbedComponent implement
         return;
       }
 
-      const prevEmbedConfig: IReportEmbedConfiguration = changes.embedConfig.previousValue;
-      const currentEmbedConfig: IReportEmbedConfiguration = changes.embedConfig.currentValue;
-      if (JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)) {
+      const prevEmbedConfig: IReportEmbedConfiguration =
+        changes.embedConfig.previousValue;
+      const currentEmbedConfig: IReportEmbedConfiguration =
+        changes.embedConfig.currentValue;
+      if (
+        JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)
+      ) {
         // Input from parent get updated, thus call embed function to re-embed the report
         this.embedReport();
       }
@@ -83,7 +104,10 @@ export class PowerBIReportEmbedComponent extends PowerBIEmbedComponent implement
       if (this.embedConfig.accessToken && this.embedConfig.embedUrl) {
         this.embedReport();
       } else {
-        this.embed = this.powerbi.bootstrap(this.containerRef.nativeElement, this.embedConfig);
+        this.embed = this.powerbi.bootstrap(
+          this.containerRef.nativeElement,
+          this.embedConfig
+        );
       }
     }
 
@@ -105,9 +129,15 @@ export class PowerBIReportEmbedComponent extends PowerBIEmbedComponent implement
 
     // Load when phasedEmbedding flag is true, embed otherwise
     if (this.phasedEmbedding) {
-      this.embed = this.powerbi.load(this.containerRef.nativeElement, this.embedConfig);
+      this.embed = this.powerbi.load(
+        this.containerRef.nativeElement,
+        this.embedConfig
+      );
     } else {
-      this.embed = this.powerbi.embed(this.containerRef.nativeElement, this.embedConfig);
+      this.embed = this.powerbi.embed(
+        this.containerRef.nativeElement,
+        this.embedConfig
+      );
     }
   }
 }

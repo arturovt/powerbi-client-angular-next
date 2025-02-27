@@ -1,10 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Embed, ITileEmbedConfiguration, Tile } from 'powerbi-client';
-import { EventHandler, PowerBIEmbedComponent } from '../powerbi-embed/powerbi-embed.component';
-import { isEmbedSetupValid } from '../../utils/utils';
+import {
+  EventHandler,
+  PowerBIEmbedComponent,
+} from '../powerbi-embed/powerbi-embed.component';
 
 /**
  * Tile component to embed the tile, extends Base component
@@ -12,8 +23,12 @@ import { isEmbedSetupValid } from '../../utils/utils';
 @Component({
   selector: 'powerbi-tile[embedConfig]',
   template: '<div class={{cssClassName}} #tileContainer></div>',
+  standalone: true,
 })
-export class PowerBITileEmbedComponent extends PowerBIEmbedComponent implements OnInit, OnChanges, AfterViewInit {
+export class PowerBITileEmbedComponent
+  extends PowerBIEmbedComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   // Input() specify properties that will be passed from parent
   // Configuration for embedding the PowerBI Tile (Required)
   @Input() embedConfig!: ITileEmbedConfiguration;
@@ -59,9 +74,13 @@ export class PowerBITileEmbedComponent extends PowerBIEmbedComponent implements 
         return;
       }
 
-      const prevEmbedConfig: ITileEmbedConfiguration = changes.embedConfig.previousValue;
-      const currentEmbedConfig: ITileEmbedConfiguration = changes.embedConfig.currentValue;
-      if (JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)) {
+      const prevEmbedConfig: ITileEmbedConfiguration =
+        changes.embedConfig.previousValue;
+      const currentEmbedConfig: ITileEmbedConfiguration =
+        changes.embedConfig.currentValue;
+      if (
+        JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)
+      ) {
         // Input from parent get updated, thus call embedTile function
         this.embedTile();
       }
@@ -80,7 +99,10 @@ export class PowerBITileEmbedComponent extends PowerBIEmbedComponent implements 
       if (this.embedConfig.accessToken && this.embedConfig.embedUrl) {
         this.embedTile();
       } else {
-        this.embed = this.powerbi.bootstrap(this.containerRef.nativeElement, this.embedConfig);
+        this.embed = this.powerbi.bootstrap(
+          this.containerRef.nativeElement,
+          this.embedConfig
+        );
       }
     }
 
@@ -97,10 +119,17 @@ export class PowerBITileEmbedComponent extends PowerBIEmbedComponent implements 
    */
   private embedTile(): void {
     // Check if the HTML container is rendered and available
-    if (!this.containerRef.nativeElement || !this.embedConfig.accessToken || !this.embedConfig.embedUrl) {
+    if (
+      !this.containerRef.nativeElement ||
+      !this.embedConfig.accessToken ||
+      !this.embedConfig.embedUrl
+    ) {
       return;
     }
 
-    this.embed = this.powerbi.embed(this.containerRef.nativeElement, this.embedConfig);
+    this.embed = this.powerbi.embed(
+      this.containerRef.nativeElement,
+      this.embedConfig
+    );
   }
 }

@@ -4,11 +4,5 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "allowedNonPeerDependencies": [
-    "powerbi-client",
-    "powerbi-report-authoring",
-    "prettier",
-    "tslib",
-    "zone.js"
-  ]
+  "allowedNonPeerDependencies": ["powerbi-client", "powerbi-report-authoring"]
 }

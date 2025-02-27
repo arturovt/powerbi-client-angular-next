@@ -20,7 +20,7 @@ describe('PowerBICreateReportEmbedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PowerBICreateReportEmbedComponent],
+      imports: [PowerBICreateReportEmbedComponent],
     }).compileComponents();
 
     // Arrange

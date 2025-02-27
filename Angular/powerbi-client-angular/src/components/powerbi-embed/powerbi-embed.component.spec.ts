@@ -11,7 +11,7 @@ describe('PowerBIEmbedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PowerBIEmbedComponent],
+      imports: [PowerBIEmbedComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PowerBIEmbedComponent);

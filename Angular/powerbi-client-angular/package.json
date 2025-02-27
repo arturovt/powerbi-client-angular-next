@@ -1,5 +1,5 @@
 {
-  "name": "powerbi-client-angular",
+  "name": "powerbi-client-angular-next",
   "version": "5.0.0",
   "description": "Angular wrapper for powerbi-client library",
   "main": "./dist/powerbi-client-angular/bundles/powerbi-client-angular.umd.js",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "scripts": {
     "build": "ng build",
+    "postbuild": "cp ../../README.md ./dist/powerbi-client-angular",
     "demo": "cd ../demo && npm install && ng serve",
     "package": "ng build && cd dist/powerbi-client-angular && npm pack",
     "test": "ng test"
@@ -28,22 +29,22 @@
     "tag": "beta"
   },
   "dependencies": {
-    "powerbi-client": "^2.23.1",
-    "tslib": "^2.1.0"
+    "powerbi-client": "^2.23.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.9",
-    "@angular-eslint/builder": "^17.5.3",
-    "@angular-eslint/eslint-plugin": "^17.5.3",
-    "@angular-eslint/eslint-plugin-template": "^17.5.3",
-    "@angular-eslint/schematics": "^17.5.3",
-    "@angular-eslint/template-parser": "^17.5.3",
-    "@angular/cli": "^17.3.9",
-    "@angular/compiler": "^17.3.12",
-    "@angular/compiler-cli": "^17.3.12",
-    "@angular/core": "^17.3.12",
-    "@angular/platform-browser": "^17.3.12",
-    "@angular/platform-browser-dynamic": "^17.3.12",
+    "@angular-devkit/build-angular": "^19.2.0",
+    "@angular-eslint/builder": "^19.1.0",
+    "@angular-eslint/eslint-plugin": "^19.1.0",
+    "@angular-eslint/eslint-plugin-template": "^19.1.0",
+    "@angular-eslint/schematics": "^19.1.0",
+    "@angular-eslint/template-parser": "^19.1.0",
+    "@angular/cli": "^19.2.0",
+    "@angular/common": "^19.2.0",
+    "@angular/compiler": "^19.2.0",
+    "@angular/compiler-cli": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/platform-browser": "^19.2.0",
+    "@angular/platform-browser-dynamic": "^19.2.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^18.19.51",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
@@ -59,9 +60,10 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "ng-packagr": "^17.3.0",
+    "ng-packagr": "^19.2.0",
     "powerbi-report-authoring": "^1.1.1",
+    "tslib": "^2.8.1",
     "typescript": "^5.4.5",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.15.0"
   }
 }

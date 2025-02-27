@@ -1,9 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Dashboard, Embed, IDashboardEmbedConfiguration } from 'powerbi-client';
-import { EventHandler, PowerBIEmbedComponent } from '../powerbi-embed/powerbi-embed.component';
+import {
+  EventHandler,
+  PowerBIEmbedComponent,
+} from '../powerbi-embed/powerbi-embed.component';
 import { isEmbedSetupValid } from '../../utils/utils';
 
 /**
@@ -12,8 +24,12 @@ import { isEmbedSetupValid } from '../../utils/utils';
 @Component({
   selector: 'powerbi-dashboard[embedConfig]',
   template: '<div class={{cssClassName}} #dashboardContainer></div>',
+  standalone: true,
 })
-export class PowerBIDashboardEmbedComponent extends PowerBIEmbedComponent implements OnInit, OnChanges, AfterViewInit {
+export class PowerBIDashboardEmbedComponent
+  extends PowerBIEmbedComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   // Input() specify properties that will be passed from parent
   // Configuration for embedding the PowerBI Dashboard (Required)
   @Input() embedConfig!: IDashboardEmbedConfiguration;
@@ -22,7 +38,8 @@ export class PowerBIDashboardEmbedComponent extends PowerBIEmbedComponent implem
   @Input() eventHandlers?: Map<string, EventHandler | null>;
 
   // Ref to the HTML div container element
-  @ViewChild('dashboardContainer') private containerRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('dashboardContainer')
+  private containerRef!: ElementRef<HTMLDivElement>;
 
   // Embedded entity
   // Note: Do not read or assign to this member variable directly, instead use the getter and setter
@@ -59,9 +76,13 @@ export class PowerBIDashboardEmbedComponent extends PowerBIEmbedComponent implem
         return;
       }
 
-      const prevEmbedConfig: IDashboardEmbedConfiguration = changes.embedConfig.previousValue;
-      const currentEmbedConfig: IDashboardEmbedConfiguration = changes.embedConfig.currentValue;
-      if (JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)) {
+      const prevEmbedConfig: IDashboardEmbedConfiguration =
+        changes.embedConfig.previousValue;
+      const currentEmbedConfig: IDashboardEmbedConfiguration =
+        changes.embedConfig.currentValue;
+      if (
+        JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)
+      ) {
         // Input from parent get updated, thus call embedDashboard function
         this.embedDashboard();
       }
@@ -80,7 +101,10 @@ export class PowerBIDashboardEmbedComponent extends PowerBIEmbedComponent implem
       if (this.embedConfig.accessToken && this.embedConfig.embedUrl) {
         this.embedDashboard();
       } else {
-        this.embed = this.powerbi.bootstrap(this.containerRef.nativeElement, this.embedConfig);
+        this.embed = this.powerbi.bootstrap(
+          this.containerRef.nativeElement,
+          this.embedConfig
+        );
       }
     }
 
@@ -100,6 +124,9 @@ export class PowerBIDashboardEmbedComponent extends PowerBIEmbedComponent implem
       return;
     }
 
-    this.embed = this.powerbi.embed(this.containerRef.nativeElement, this.embedConfig);
+    this.embed = this.powerbi.embed(
+      this.containerRef.nativeElement,
+      this.embedConfig
+    );
   }
 }

@@ -1,9 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Embed, IQnaEmbedConfiguration, Qna } from 'powerbi-client';
-import { EventHandler, PowerBIEmbedComponent } from '../powerbi-embed/powerbi-embed.component';
+import {
+  EventHandler,
+  PowerBIEmbedComponent,
+} from '../powerbi-embed/powerbi-embed.component';
 import { isEmbedSetupValid } from '../../utils/utils';
 
 /**
@@ -12,8 +24,12 @@ import { isEmbedSetupValid } from '../../utils/utils';
 @Component({
   selector: 'powerbi-qna[embedConfig]',
   template: '<div class={{cssClassName}} #qnaContainer></div>',
+  standalone: true,
 })
-export class PowerBIQnaEmbedComponent extends PowerBIEmbedComponent implements OnInit, OnChanges, AfterViewInit {
+export class PowerBIQnaEmbedComponent
+  extends PowerBIEmbedComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   // Input() specify properties that will be passed from parent
   // Configuration for embedding the PowerBI Qna visual (Required)
   @Input() embedConfig!: IQnaEmbedConfiguration;
@@ -59,9 +75,13 @@ export class PowerBIQnaEmbedComponent extends PowerBIEmbedComponent implements O
         return;
       }
 
-      const prevEmbedConfig: IQnaEmbedConfiguration = changes.embedConfig.previousValue;
-      const currentEmbedConfig: IQnaEmbedConfiguration = changes.embedConfig.currentValue;
-      if (JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)) {
+      const prevEmbedConfig: IQnaEmbedConfiguration =
+        changes.embedConfig.previousValue;
+      const currentEmbedConfig: IQnaEmbedConfiguration =
+        changes.embedConfig.currentValue;
+      if (
+        JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)
+      ) {
         // Input from parent get updated, thus call embedQnaVisual function
         this.embedQnaVisual();
       }
@@ -80,7 +100,10 @@ export class PowerBIQnaEmbedComponent extends PowerBIEmbedComponent implements O
       if (this.embedConfig.accessToken && this.embedConfig.embedUrl) {
         this.embedQnaVisual();
       } else {
-        this.embed = this.powerbi.bootstrap(this.containerRef.nativeElement, this.embedConfig);
+        this.embed = this.powerbi.bootstrap(
+          this.containerRef.nativeElement,
+          this.embedConfig
+        );
       }
     }
 
@@ -101,6 +124,9 @@ export class PowerBIQnaEmbedComponent extends PowerBIEmbedComponent implements O
       return;
     }
 
-    this.embed = this.powerbi.embed(this.containerRef.nativeElement, this.embedConfig);
+    this.embed = this.powerbi.embed(
+      this.containerRef.nativeElement,
+      this.embedConfig
+    );
   }
 }

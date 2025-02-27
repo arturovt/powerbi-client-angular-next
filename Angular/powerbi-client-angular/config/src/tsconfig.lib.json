@@ -1,21 +1,23 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/lib",
-    "declaration": true,
-    "declarationMap": true,
-    "inlineSources": true,
-    "types": [],
-    "lib": [
-      "dom",
-      "es2018"
-    ]
+    "target": "ES2022",
+    "module": "es2015",
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "lib": ["dom", "es2018"],
+    "types": ["node"],
+    "useDefineForClassFields": false
   },
-  "include": [
-    "../../src/**/*"
-  ],
-  "exclude": [
-    "../../src/test.ts",
-    "../../**/*.spec.ts"
-  ]
+  "angularCompilerOptions": {
+    "compilationMode": "partial",
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true
+  },
+  "include": ["../../src/**/*"],
+  "exclude": ["../../src/test.ts", "../../**/*.spec.ts"]
 }

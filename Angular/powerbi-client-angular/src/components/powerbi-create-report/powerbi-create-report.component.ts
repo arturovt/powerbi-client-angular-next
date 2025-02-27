@@ -1,11 +1,23 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Embed, Create } from 'powerbi-client';
 import { IReportCreateConfiguration } from 'powerbi-models';
 
-import { EventHandler, PowerBIEmbedComponent } from '../powerbi-embed/powerbi-embed.component';
+import {
+  EventHandler,
+  PowerBIEmbedComponent,
+} from '../powerbi-embed/powerbi-embed.component';
 import { isEmbedSetupValid } from '../../utils/utils';
 
 /**
@@ -14,8 +26,12 @@ import { isEmbedSetupValid } from '../../utils/utils';
 @Component({
   selector: 'powerbi-create-report[embedConfig]',
   template: '<div class={{cssClassName}} #createReportContainer></div>',
+  standalone: true,
 })
-export class PowerBICreateReportEmbedComponent extends PowerBIEmbedComponent implements OnInit, OnChanges, AfterViewInit {
+export class PowerBICreateReportEmbedComponent
+  extends PowerBIEmbedComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   // Configuration for embedding the PowerBI Create report (Required)
   @Input() embedConfig!: IReportCreateConfiguration;
 
@@ -23,7 +39,8 @@ export class PowerBICreateReportEmbedComponent extends PowerBIEmbedComponent imp
   @Input() eventHandlers?: Map<string, EventHandler | null>;
 
   // Ref to the HTML div container element
-  @ViewChild('createReportContainer') private containerRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('createReportContainer')
+  private containerRef!: ElementRef<HTMLDivElement>;
 
   // Embedded entity
   // Note: Do not read or assign to this member variable directly, instead use the getter and setter
@@ -60,9 +77,13 @@ export class PowerBICreateReportEmbedComponent extends PowerBIEmbedComponent imp
         return;
       }
 
-      const prevEmbedConfig: IReportCreateConfiguration = changes.embedConfig.previousValue;
-      const currentEmbedConfig: IReportCreateConfiguration = changes.embedConfig.currentValue;
-      if (JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)) {
+      const prevEmbedConfig: IReportCreateConfiguration =
+        changes.embedConfig.previousValue;
+      const currentEmbedConfig: IReportCreateConfiguration =
+        changes.embedConfig.currentValue;
+      if (
+        JSON.stringify(prevEmbedConfig) !== JSON.stringify(currentEmbedConfig)
+      ) {
         // Input from parent get updated, thus call embedCreateReport function
         this.embedCreateReport();
       }
@@ -96,6 +117,9 @@ export class PowerBICreateReportEmbedComponent extends PowerBIEmbedComponent imp
     }
 
     // Embed create report
-    this.embed = this.powerbi.createReport(this.containerRef.nativeElement, this.embedConfig);
+    this.embed = this.powerbi.createReport(
+      this.containerRef.nativeElement,
+      this.embedConfig
+    );
   }
 }

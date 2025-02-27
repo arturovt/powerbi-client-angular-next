@@ -8,7 +8,10 @@ import { stringifyMap, sdkType, sdkWrapperVersion } from '../../utils/utils';
 /**
  * Type for event handler function of embedded entity
  */
-export type EventHandler = (event?: service.ICustomEvent<any>, embeddedEntity?: Embed) => void | null;
+export type EventHandler = (
+  event?: service.ICustomEvent<any>,
+  embeddedEntity?: Embed
+) => void | null;
 
 /**
  * Base component to hold common properties for all the Power BI entities
@@ -16,6 +19,7 @@ export type EventHandler = (event?: service.ICustomEvent<any>, embeddedEntity?: 
 @Component({
   selector: 'powerbi-embed',
   template: '',
+  standalone: true,
 })
 export class PowerBIEmbedComponent implements OnInit {
   // Power BI service instance to be used if user doesnt provide custom service
@@ -43,7 +47,8 @@ export class PowerBIEmbedComponent implements OnInit {
         PowerBIEmbedComponent._powerbi = new service.Service(
           factories.hpmFactory,
           factories.wpmpFactory,
-          factories.routerFactory);
+          factories.routerFactory
+        );
       }
       this.powerbi = PowerBIEmbedComponent._powerbi;
     }
@@ -58,7 +63,10 @@ export class PowerBIEmbedComponent implements OnInit {
    * @param eventHandlerMap Array of event handlers to be set on embedded entity
    * @returns void
    */
-  protected setEventHandlers(embed: Embed, eventHandlerMap: Map<string, EventHandler | null>): void {
+  protected setEventHandlers(
+    embed: Embed,
+    eventHandlerMap: Map<string, EventHandler | null>
+  ): void {
     // Get string representation of eventHandlerMap
     const eventHandlerMapString = stringifyMap(eventHandlerMap);
 
